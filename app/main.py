@@ -11,7 +11,11 @@ app = FastAPI(
 # Health check endpoint
 @app.get("/health", tags=["system"])
 async def health_check() -> dict:
-    return {"status": "ok", "app_name": settings.app_name, "app_version": settings.app_version}
+    return {
+        "status": "ok", 
+        "app_name": settings.app_name, 
+        "version": settings.app_version
+        }
 
 app.include_router(ingest_router)
 app.include_router(chat_router)
