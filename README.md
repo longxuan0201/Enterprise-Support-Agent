@@ -89,9 +89,15 @@ uvicorn app.main:app --reload
 - [x] 追加清晰文件内容以及分块功能
 - [x] 追加文件存储和分块存储功能
 
-## day03 2026/05/12 TODO
-- [ ] 让分块从文本块升级成可检索单元
-- [ ] 明确元数据内容
-- [ ] 为未来retrieval做准备
-- [ ] 让chunk具备citation和filter基础
-- [ ] 为后边embedidng / vector store接入做好接口
+## day03 day04 2026/05/12 
+- [x] 让分块从文本块升级成可检索单元
+- [x] 明确元数据内容
+- [x] 为未来retrieval做准备
+- [x] 让chunk具备citation和filter基础
+- [x] 为后边embedidng / vector store接入做好接口
+
+## day05 2026/05/13 将文本转换升级为可被检索的向量资产 先打通链路
+- [x] 实现可运行的MockEmbeddingClient
+- [x] 实现chunk向量化逻辑
+- [x] vectorDocument 暂时写入本地向量存储
+- [x] 补足ingest处理 在ingest阶段完成向量化，而不是在query阶段 增加检索速度

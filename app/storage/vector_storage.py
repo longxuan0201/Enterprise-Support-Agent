@@ -10,8 +10,8 @@ class VectorStore(Protocol):
         """Add a list of documents to the vector store."""
         ...
     
-    def query(self, query_vector: list[float], top_k: int = 5) -> list[VectorDocument]:
-        """Query the vector store with a vector and return the top K most similar documents."""
+    def get_all_documents(self) -> list[VectorDocument]:
+        """Return all documents in the vector store."""
         ...
         
 class InMemoryVectorStore:
@@ -23,6 +23,5 @@ class InMemoryVectorStore:
     def add_documents(self, documents: list[VectorDocument]) -> None:
         self.documents.extend(documents)
     
-    def query(self, query_vector: list[float], top_k: int = 5) -> list[VectorDocument]:
-        # This is a mock implementation that returns the first K documents regardless of the query vector
-        return self.documents[:top_k]
+    def get_all_documents(self) -> list[VectorDocument]:
+        return self.documents
