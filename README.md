@@ -90,8 +90,8 @@ uvicorn app.main:app --reload
 - [x] 追加文件存储和分块存储功能
 
 ## day03 2026/05/12 TODO
-- [x] 让分块从文本块升级成可检索单元
-- [x] 明确元数据内容
-- [x] 为未来retrieval做准备
-- [x] 让chunk具备citation和filter基础
-- [x] 为后边embedidng / vector store接入做好接口
+- [ ] 让分块从文本块升级成可检索单元
+- [ ] 明确元数据内容
+- [ ] 为未来retrieval做准备
+- [ ] 让chunk具备citation和filter基础
+- [ ] 为后边embedidng / vector store接入做好接口

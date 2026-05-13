@@ -8,7 +8,10 @@ async def handle_ingest(request: IngestRequest) -> IngestResponse:
     document, chunk = build_document_and_chunks(
         title=request.title,
         content=request.content,
-        source_type=request.source_type or "manual"
+        source_type=request.source_type or "manual",
+        system_name=request.system_name,
+        environment=request.environment,
+        tags=request.tags
     )
     save_document(document)
     save_chunks(document.document_id, chunk)

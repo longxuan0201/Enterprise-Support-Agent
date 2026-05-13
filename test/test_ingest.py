@@ -7,7 +7,10 @@ with open("data\sample_sop.txt", "r", encoding="utf-8") as f:
 payload = {
     "title": "SAP Interface Failure Initial Troubleshooting SOP",
     "content": content,
-    "source_type": "sop"
+    "source_type": "sop",
+    "system_name": "Enterprise Support Agent",
+    "environment": "production",
+    "tags": ["sap", "interface", "troubleshooting", "sop"]
 }   
 
 

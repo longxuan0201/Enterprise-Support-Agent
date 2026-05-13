@@ -1,3 +1,4 @@
+from typing import Optional
 import uuid
 
 from app.schemas.document import ChunkRecord, DocumentRecord
@@ -28,7 +29,14 @@ def chunk_text(text: str, chunk_size: int = 300, chunk_overlap: int = 50) -> lis
     
     return chunks
 
-def build_document_and_chunks(title: str, content: str, source_type: str = "manual") -> tuple[DocumentRecord, list[ChunkRecord]]:
+def build_document_and_chunks(
+    title: str, 
+    content: str,
+    source_type: str = "manual",
+    system_name: Optional[str] = None,
+    environment: Optional[str] = None,
+    tags: Optional[list[str]] = None
+    ) -> tuple[DocumentRecord, list[ChunkRecord]]:
     """Build a list of document chunks with metadata."""
     document_id = str(uuid.uuid4())
     cleaned_content = clean_text(content)
@@ -37,7 +45,10 @@ def build_document_and_chunks(title: str, content: str, source_type: str = "manu
         document_id=document_id,
         title=title,
         source_type=source_type,
-        content=cleaned_content
+        content=cleaned_content,
+        system_name=system_name,
+        environment=environment,
+        tags=tags
     )
     
     raw_chunks = chunk_text(cleaned_content)
@@ -53,6 +64,9 @@ def build_document_and_chunks(title: str, content: str, source_type: str = "manu
             metadata={
                 "title": title,
                 "source_type": source_type,
+                "system_name": system_name,
+                "environment": environment,
+                "tags": tags,
                 "chunk_index": index,
                 "chunk_size": len(chunk)
             }
