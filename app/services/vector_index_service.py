@@ -13,8 +13,10 @@ def index_chunks(chunks: list[ChunkRecord]) -> int:
     vector_documents = build_vector_documents(chunks)
     enriched_documents = attach_embeddings(vector_documents, embedding_client)
     vector_store.add_documents(enriched_documents)
+    print("DEBUG vector documents to be indexed:", len(enriched_documents))
+    print("DEBUG indexed count in service:", len(vector_store.get_all_documents()))
     return len(enriched_documents)
 
-def get_indexed_documents():
+def get_indexed_documents() -> list[ChunkRecord]:
     """Retrieve all indexed documents from the vector store."""
     return vector_store.get_all_documents()

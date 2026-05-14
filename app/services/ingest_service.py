@@ -16,6 +16,7 @@ async def handle_ingest(request: IngestRequest) -> IngestResponse:
     )
     save_document(document)
     save_chunks(document.document_id, chunk)
+    
     indexed_count = index_chunks(chunk)
     
     return IngestResponse(

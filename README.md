@@ -101,3 +101,9 @@ uvicorn app.main:app --reload
 - [x] 实现chunk向量化逻辑
 - [x] vectorDocument 暂时写入本地向量存储
 - [x] 补足ingest处理 在ingest阶段完成向量化，而不是在query阶段 增加检索速度
+
+## day06 2026/05/14 做出一个最小检索接口
+- [ ] 接收用户问题
+- [ ] 对问题做 embedding
+- [ ] 在当前 vector store 中检索最相关的 chunk
+- [ ] 返回 top-k 证据片段
