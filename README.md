@@ -103,7 +103,11 @@ uvicorn app.main:app --reload
 - [x] 补足ingest处理 在ingest阶段完成向量化，而不是在query阶段 增加检索速度
 
 ## day06 2026/05/14 做出一个最小检索接口
-- [ ] 接收用户问题
-- [ ] 对问题做 embedding
-- [ ] 在当前 vector store 中检索最相关的 chunk
-- [ ] 返回 top-k 证据片段
+- [x] 接收用户问题
+- [x] 对问题做 embedding
+- [x] 在当前 vector store 中检索最相关的 chunk
+- [x] 返回 top-k 证据片段
+
+## day07 2026/05/15 /chat 接入真实retrieval 生成answer
+- [x] 基于topk证据生成答案
+- [x] 返回citations

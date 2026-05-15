@@ -10,7 +10,7 @@ def build_vector_document(chunk_record: ChunkRecord) -> VectorDocument:
         id=chunk_record.chunk_id,
         text=chunk_record.text,
         metadata={
-            "docunment_id": chunk_record.document_id,
+            "document_id": chunk_record.document_id,
             **chunk_record.metadata
         }
     )
