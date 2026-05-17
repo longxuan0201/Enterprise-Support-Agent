@@ -15,3 +15,6 @@ class MockEmbeddingClient:
         line_count = float(text.count('\n') + 1)
         word_like_count = float(len(text.split()))
         return [length, line_count, word_like_count]
+    def embed_texts(self, texts: list[str]) -> list[list[float]]:
+        """Mock embedding function that returns a fixed-size vector of zeros for each document."""
+        return [self.embed_text(text) for text in texts]

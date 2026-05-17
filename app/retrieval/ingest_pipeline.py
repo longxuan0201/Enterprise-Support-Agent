@@ -3,10 +3,52 @@ import uuid
 
 from app.schemas.document import ChunkRecord, DocumentRecord
 
-
+## v1 清洗策略
 def clean_text(text: str) -> str:
     """Clean the input text by removing extra whitespace and newlines."""
     return '\n'.join(line.strip() for line in text.splitlines() if line.strip())
+
+def find_chunk_end_boundary(text: str, start:int, end:int) -> int:
+    """Find the boundaries of the chunks in the text."""
+    boundaries_candidates = ["\n",".",",","!", "?", ";", ":", " "]
+    search_window=text[start:end]
+    best_boundary = -1
+    for marker in boundaries_candidates:
+        pos = search_window.rfind(marker)
+        if pos > best_boundary:
+            best_boundary = pos
+    if best_boundary == -1:
+        return end
+    adjusted_end=start + best_boundary + 1
+
+    if adjusted_end - start < 100:
+            return end
+    return adjusted_end
+
+def find_chunk_start_boundary(text: str, start: int, end: int) -> int:
+    """
+    Adjust the chunk start position forward to the nearest natural boundary
+    within a small window, to avoid starting in the middle of a word.
+    """
+    boundary_candidates = ["\n", " "]
+    search_window = text[start:end]
+
+    best_boundary = -1
+    for marker in boundary_candidates:
+        pos = search_window.find(marker)
+        if pos != -1 and (best_boundary == -1 or pos < best_boundary):
+            best_boundary = pos
+
+    if best_boundary == -1:
+        return start
+
+    adjusted_start = start + best_boundary + 1
+
+    # 防止移动太多导致 overlap 基本失效
+    if adjusted_start - start > 30:
+        return start
+
+    return adjusted_start
 
 def chunk_text(text: str, chunk_size: int = 300, chunk_overlap: int = 50) -> list[str]:
     """Chunk the input text into smaller pieces with optional overlap."""
@@ -22,10 +64,21 @@ def chunk_text(text: str, chunk_size: int = 300, chunk_overlap: int = 50) -> lis
     
     while start < text_length:
         end = min(start + chunk_size, text_length)
-        chunks.append(text[start:end])
-        if end == text_length:
+        optimal_end = find_chunk_end_boundary(text, start, end)
+         # 防止边界优化失败时出现死循环
+        if optimal_end <= start:
+            optimal_end = end
+
+        chunk = text[start:optimal_end]
+        chunks.append(chunk)
+        if optimal_end >= text_length:
             break  # Reached the end of the text
-        start += chunk_size - chunk_overlap  # Move start forward by chunk size minus overlap
+        next_start = max(optimal_end - chunk_overlap, 0)
+        next_start = find_chunk_start_boundary(text, next_start, min(next_start + 50, text_length))
+
+        if next_start <= start:
+            next_start = max(optimal_end - chunk_overlap, 0) # Move start forward by chunk size minus overlap
+        start = next_start # Move start forward by chunk size minus overlap
     
     return chunks
 

@@ -1,0 +1,622 @@
+[
+  {
+    "chunk_id": "d1cf6bec-6b6d-4968-a441-db8cf109fff7",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 0,
+    "text": "Purpose:\nThis SOP describes the initial troubleshooting process for SAP interface failures in the enterprise integration environment. It is intended for support engineers who receive alerts or user reports indicating that an interface job, API integration, or file-based integration between SAP and ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 0,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "c17d76f4-00c2-4cc1-8620-48c874c5b52f",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 1,
+    "text": "or file-based integration between SAP and downstream systems has failed. The goal is to standardize the first response, reduce mean time to identify the issue, and ensure that all critical checkpoints are reviewed before escalation.\nScope:\nThis SOP applies to production and staging environments for ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 1,
+      "chunk_size": 300
+    }
+  },
+  {
+    "chunk_id": "b24f250a-6974-4e4a-a574-ec89587d52ef",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 2,
+    "text": "to production and staging environments for SAP outbound and inbound integrations, including but not limited to order interfaces, inventory synchronization, invoice integration, and customer master data synchronization. This SOP does not cover low-level code fixes, emergency transport deployment, or ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 2,
+      "chunk_size": 300
+    }
+  },
+  {
+    "chunk_id": "cb9dc27b-fbe4-4100-b127-8cf75da02102",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 3,
+    "text": "code fixes, emergency transport deployment, or database-level recovery procedures. If the issue requires system restart, transport rollback, or direct database operation, human approval and escalation to the responsible team are required.\nPreconditions:\nBefore starting the troubleshooting process, ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 3,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "f541cf49-14e0-467a-9062-1f998db015d4",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 4,
+    "text": "Before starting the troubleshooting process, the support engineer must confirm that they have the correct access permissions for the monitoring dashboard, middleware logs, SAP job status screen, and incident management system. The engineer must also confirm the affected environment, the system name,",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 4,
+      "chunk_size": 300
+    }
+  },
+  {
+    "chunk_id": "5ca1fa5c-6124-43ee-8e24-d804b99565a0",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 5,
+    "text": "the affected environment, the system name, the interface name if known, and the business impact reported by users or monitoring alerts.\nStep 1: Confirm the incident context\nCheck whether the issue was reported by monitoring, by an end user, or by another operations team. Record the incident start ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 5,
+      "chunk_size": 298
+    }
+  },
+  {
+    "chunk_id": "f9760c2e-4284-45a3-a0c9-a5ce9e69dc82",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 6,
+    "text": "operations team. Record the incident start time, the first observed symptoms, the affected business function, and whether the issue is ongoing or intermittent. Confirm whether the issue affects only one interface or multiple interfaces. If multiple interfaces are impacted simultaneously, consider a ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 6,
+      "chunk_size": 300
+    }
+  },
+  {
+    "chunk_id": "4d6b516d-df60-477f-9ef1-4b136301ef5f",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 7,
+    "text": "are impacted simultaneously, consider a shared middleware, authentication, network, or upstream SAP system issue.\nStep 2: Identify environment and recent changes\nConfirm whether the failure occurred in production, staging, or test. Review the change calendar for the last twenty-four hours and ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 7,
+      "chunk_size": 294
+    }
+  },
+  {
+    "chunk_id": "333d764a-af02-482b-9d0e-15628b2f4a05",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 8,
+    "text": "calendar for the last twenty-four hours and identify any recent deployments, configuration updates, certificate renewals, network changes, middleware version updates, or batch schedule modifications. If a recent change is found, include the change ticket ID in the incident notes. Do not assume the ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 8,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "6edaefbb-e95f-4ee8-bec6-9d26fd138f7f",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 9,
+    "text": "ID in the incident notes. Do not assume the recent change is the root cause, but treat it as an important signal.\nStep 3: Check job and interface status\nReview the integration job status from the monitoring tool or SAP transaction screen. Determine whether the job is failed, delayed, stuck, ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 9,
+      "chunk_size": 292
+    }
+  },
+  {
+    "chunk_id": "d18b88ef-0638-4608-a0c9-703d003a10c4",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 10,
+    "text": "whether the job is failed, delayed, stuck, canceled, or completed with partial records. Check the number of retries and whether automatic retry logic has already been triggered. If the same interface has failed repeatedly more than three times within one hour, mark the issue as repeated failure and ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 10,
+      "chunk_size": 300
+    }
+  },
+  {
+    "chunk_id": "ed5cadd4-6ebb-4c86-9558-c0861ff4e8a5",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 11,
+    "text": "one hour, mark the issue as repeated failure and prepare for escalation.\nStep 4: Review error details and logs\nOpen the relevant logs from middleware, API gateway, or integration platform. Look for concrete error indicators such as timeout, authentication failure, authorization failure, payload ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 11,
+      "chunk_size": 296
+    }
+  },
+  {
+    "chunk_id": "a61b51bc-91ea-4f1b-881c-bff54d2c6df5",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 12,
+    "text": "failure, authorization failure, payload validation error, mapping error, schema mismatch, downstream service unavailable, file not found, duplicate message detected, or connection reset. Copy the most relevant error message into the incident notes. Avoid copying a large amount of raw logs without ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 12,
+      "chunk_size": 298
+    }
+  },
+  {
+    "chunk_id": "bf7f4ada-ab57-4b78-8541-419b2ebc876b",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 13,
+    "text": "Avoid copying a large amount of raw logs without summarizing the key failure signal.\nStep 5: Validate upstream and downstream dependencies\nDetermine whether SAP generated the outbound message successfully. If SAP did not generate the message, the issue may be upstream. If SAP generated the message ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 13,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "d6f642af-5a68-40de-8fc6-0d583788a303",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 14,
+    "text": "may be upstream. If SAP generated the message but the middleware did not receive or process it, the issue may be within the transport or middleware layer. If the middleware processed the message but the downstream application rejected it, the issue may be in the receiving system, payload contract, ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 14,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "599c5c8d-527c-40cf-9b68-ec0daab0aceb",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 15,
+    "text": "be in the receiving system, payload contract, or business validation rules. Clearly classify which system boundary the failure is closest to.\nStep 6: Check authentication and certificates\nIf the interface uses API authentication, service account credentials, certificates, or tokens, verify whether ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 15,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "fc6de80b-345e-4110-9b35-3b8940026427",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 16,
+    "text": "certificates, or tokens, verify whether any secret rotation, password expiration, or certificate expiration occurred recently. If a certificate expired or a secret was rotated without synchronized update, do not attempt an emergency replacement without approval. Instead, record the finding and ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 16,
+      "chunk_size": 295
+    }
+  },
+  {
+    "chunk_id": "7f8c2e6b-35b7-4219-828e-c44b6106a439",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 17,
+    "text": "approval. Instead, record the finding and escalate according to the change control policy.\nStep 7: Assess data impact\nIdentify whether messages were lost, delayed, duplicated, or only temporarily blocked. Estimate the number of affected transactions. For order-related interfaces, identify whether ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 17,
+      "chunk_size": 298
+    }
+  },
+  {
+    "chunk_id": "1caf6d48-f169-4b02-9ed3-5eafb91d887f",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 18,
+    "text": "For order-related interfaces, identify whether order creation, update, or confirmation events were impacted. For inventory-related interfaces, assess whether stale data may affect stock accuracy. For invoice interfaces, determine whether financial reporting or settlement may be delayed. Record the ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 18,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "4f0d3f21-2581-4c49-9f74-f144676fed78",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 19,
+    "text": "or settlement may be delayed. Record the expected business impact severity as low, medium, high, or critical.\nStep 8: Determine whether safe retry is possible\nIf the root cause appears transient and retry is known to be idempotent, the support engineer may recommend a controlled retry. However, no ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 19,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "787bf5b2-7980-4cf6-964b-6c6ca48cbe74",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 20,
+    "text": "may recommend a controlled retry. However, no retry should be executed automatically if duplicate processing could create financial, inventory, or customer data inconsistency. For high-risk operations, approval from the responsible system owner or on-call lead is required before retry. All retry ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 20,
+      "chunk_size": 297
+    }
+  },
+  {
+    "chunk_id": "2660cb28-7c66-4235-8f79-285f8af97291",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 21,
+    "text": "on-call lead is required before retry. All retry decisions must be recorded in the incident log.\nStep 9: Escalation criteria\nEscalate immediately if any of the following conditions are met:\n1. Production business impact is high or critical.\n2. The issue has continued for more than thirty minutes ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 21,
+      "chunk_size": 297
+    }
+  },
+  {
+    "chunk_id": "a1f5156a-f3bb-4ffe-a121-c5a170c07032",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 22,
+    "text": "issue has continued for more than thirty minutes without a clear root cause.\n3. Multiple interfaces are failing at the same time.\n4. Authentication or certificate issues are suspected.\n5. Data inconsistency or duplicate processing risk exists.\n6. Manual retry or restart requires elevated approval.\n",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 22,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "0f6bc1d5-2dc8-4469-9ec9-d7e19e27163a",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 23,
+    "text": "retry or restart requires elevated approval.\nWhen escalating, include the incident summary, key error message, impacted systems, affected time range, recent change information, and current hypothesis.\nStep 10: Incident documentation\nEvery troubleshooting action must be documented in the incident ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 23,
+      "chunk_size": 297
+    }
+  },
+  {
+    "chunk_id": "db38ce41-19f3-4cb4-a963-275ca313a943",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 24,
+    "text": "action must be documented in the incident management system. The support engineer must record timestamps, systems checked, logs reviewed, findings, retry decisions, escalation decisions, and people contacted. This documentation is required not only for handoff but also for post-incident review and ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 24,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "81612b99-9592-4165-9a2b-6f8b55278f15",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 25,
+    "text": "handoff but also for post-incident review and audit purposes.\nStep 11: Communication guidelines\nIf users are impacted, provide a short status update that explains the current situation without making unsupported claims. Use language such as: “We have identified an interface processing issue ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 25,
+      "chunk_size": 292
+    }
+  },
+  {
+    "chunk_id": "b5e6717a-1bed-46aa-ab78-e4960b9128d0",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 26,
+    "text": "have identified an interface processing issue affecting order synchronization and are currently investigating logs and system dependencies.” Avoid promising a recovery time unless confirmed by the responsible technical team. Update stakeholders when new evidence is found or when escalation occurs.\n",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 26,
+      "chunk_size": 299
+    }
+  },
+  {
+    "chunk_id": "d1e26a92-a094-4790-95c2-4bcffb124d59",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 27,
+    "text": "new evidence is found or when escalation occurs.\nStep 12: Closure conditions\nThe incident may be considered ready for closure only when the failed interface has either recovered or been handed over with a clear owner, the business impact has been assessed, all actions are documented, and any ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 27,
+      "chunk_size": 293
+    }
+  },
+  {
+    "chunk_id": "94a763a1-12e4-46e7-8b65-b1869cb11a9b",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 28,
+    "text": "assessed, all actions are documented, and any required follow-up tasks are created. If the issue is resolved by retry, confirm that downstream data consistency has been checked before closing the incident.\nNotes:\nThis SOP is intended for first-line and second-line support triage. It does not ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 28,
+      "chunk_size": 293
+    }
+  },
+  {
+    "chunk_id": "56a7daac-801f-481b-bbb6-6791db5942ca",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 29,
+    "text": "and second-line support triage. It does not replace expert diagnosis by SAP functional teams, middleware platform engineers, network engineers, or application owners. When uncertainty exists, prioritize containment, evidence collection, impact assessment, and safe escalation over fast but risky ",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 29,
+      "chunk_size": 296
+    }
+  },
+  {
+    "chunk_id": "1da38319-4747-481b-89cc-4123398473c6",
+    "document_id": "217169af-40aa-4012-bac5-52ca9fc25797",
+    "chunk_index": 30,
+    "text": "and safe escalation over fast but risky action.",
+    "metadata": {
+      "title": "SAP Interface Failure Initial Troubleshooting SOP",
+      "source_type": "sop",
+      "system_name": "SAP",
+      "environment": "production",
+      "tags": [
+        "sap",
+        "interface",
+        "troubleshooting",
+        "sop"
+      ],
+      "chunk_index": 30,
+      "chunk_size": 47
+    }
+  }
+]

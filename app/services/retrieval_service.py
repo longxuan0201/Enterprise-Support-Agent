@@ -14,9 +14,10 @@ def retrieve_evidence(request: RetrievalRequest) -> RetrievalResponse:
             id=document.id,
             text=document.text,
             metadata=document.metadata,
-            score=score
+            score=score,
+            rank=index + 1
         )
-        for document, score in results
+        for index, (document, score) in enumerate(results)
     ]
 
     return RetrievalResponse(

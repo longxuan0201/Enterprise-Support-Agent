@@ -111,3 +111,9 @@ uvicorn app.main:app --reload
 ## day07 2026/05/15 /chat 接入真实retrieval 生成answer
 - [x] 基于topk证据生成答案
 - [x] 返回citations
+
+## day08 2026/05/16 升级retrieval
+- [x] 优化chunk 避免中间截断
+- [x] 让后续结果更适合后续rerank
+- [x] embeding抽象收紧
+- [x] 为后边embedding/pgvector做真实接口预留

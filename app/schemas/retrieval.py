@@ -12,6 +12,7 @@ class RetrievalHit(BaseModel):
     text: str = Field(..., description="The text content of the retrieved document")
     metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata about the retrieved document")
     score: float = Field(..., description="The relevance score of the retrieved document")
+    rank: int = Field(..., description="The rank of the retrieved document")
     
 class RetrievalResponse(BaseModel):
     query: str = Field(..., description="The original query that was processed")
